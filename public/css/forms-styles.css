@@ -1,0 +1,55 @@
+table {
+    border-collapse: collapse;
+    background-color: #F28482;
+    color: #F7EDE2;
+    margin-left: 100px;
+}
+
+tr {
+    border-bottom: 2px solid #F7EDE2;
+}
+
+td, th {
+    /* border: 1px solid black; */
+    padding: 8px;
+}
+
+.section {
+    display: flex;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.subject-main-content{
+    flex: 1;
+}
+
+.subject-main-content input[type="checkbox"] {
+    width: initial;
+    transition: none;
+  }
+
+.subject-main-content input[type="checkbox"]:focus {
+    width: initial;
+  }
+
+.subject-main-content input {
+    width: 70%;
+}
+.subject-main-content input:focus {
+    width: 80%;
+}
+
+.table-section {
+    flex: 1;
+    margin-top: 150px;
+}
+
+.subject-table {
+    width: 400px;
+}
+
+.subject-table td {
+    text-align: center;
+}

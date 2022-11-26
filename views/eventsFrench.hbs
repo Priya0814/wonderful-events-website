@@ -1,0 +1,85 @@
+<body>
+    {{#if displayAlert}}
+        <div class="alert alert-primary" role="alert" style="padding: 15px; margin: 10px; background-color:{{alertColor}}; color: #F7EDE2;">
+        {{alertMessage}}
+        </div>
+    {{/if}}
+
+    <div class="main-content">
+        <h3>Mes Événements</h3>
+
+        <table id="events-table">
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Date</th>
+                <th>Lieu</th>
+            </tr>
+            {{#each allEvents}}
+            <tr>
+                <td>{{this.id}}</td>
+                <td>{{this.name}}</td>
+                <td>{{this.date}}</td>
+                <td>{{this.location}}</td>
+            </tr>
+            {{/each}}
+        </table>
+
+        {{!-- work on specific event --}}
+        <form action="/events" method="get" role="form" class="formStyle" id="edit-event-form">
+                <legend>Modifier un événement</legend>
+                    <label for="eventId">Entrez l'id de l'événement:</label><br>
+                    <input type="text" name="eventId" id="eventId" required><br>
+                <br>
+                <button type="submit" class="buttonsDesign" id="event-edit-form-submit">Modifier</button>
+        </form>
+
+        {{!-- create new event --}}
+        <form action="/events" method="post" role ="form" class="formStyle" id="new-event-form">
+                <legend>Créer un événement</legend>
+                    <label for="newEventName">Entrez le nom de l'événement:</label><br>
+                    <input type="text" name="newEventName" id="newEventName" required><br>
+
+                    <label for="newEventDate">Entrez la date de l'événement:</label><br>
+                    <input type="text" name="newEventDate" id="newEventDate" placeholder="AAAA-MM-JJ" pattern="[1-2][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]" required><br>
+
+                    <label for="edit-event-location">Entrez le lieu de l'événement:</label><br>
+                    <input type="text" name="newEventLocation" id="newEventLocation" required><br>
+                <br>
+                <input type="hidden" name="_method" value="post">
+                <button type="submit" class="buttonsDesign" id="new-event-form-submit">Créer</button>
+        </form>
+
+        {{!-- delete an event --}}
+        <form action="/events" method="post" role ="form" class="formStyle" id="delete-event-form">
+                <legend>Supprimer un événement</legend>
+                    <label for="eventId">Entrez l'id de l'événement:</label><br>
+                    <input type="text" name="eventId" id="delete-event" required><br>
+                <br>
+                <input type="hidden" name="_method" value="delete">
+                <button style="margin-bottom:150px;" type="submit" class="buttonsDesign" id="event-delete-form-submit">Supprimer</button>
+        </form>
+    </div>
+
+    <script type="text/javascript">
+        document.getElementById("home-navbar").innerText = "Accueil";
+        document.getElementById("events-navbar").innerText = "Mes Événements";
+        document.getElementById("about-us-navbar").innerText = "À Propos";
+        document.getElementById("sign-in-navbar").innerText = "Se Connecter | S'Inscrire"
+    </script>
+
+    {{#if isSignedIn}}
+        <script type="text/javascript">
+            let button = document.getElementById("sign-in-navbar");
+            button.innerText = "Se Déconnecter";
+            button.href = "/signout";
+        </script>
+    {{/if}}
+
+    {{#if noEvents}}
+        <script type="text/javascript">
+            let table = document.getElementById("events-table");
+            table.style.display = "none";
+        </script>
+    {{/if}}
+</body>

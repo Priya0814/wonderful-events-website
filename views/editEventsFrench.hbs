@@ -1,0 +1,50 @@
+<body>
+    {{#if displayAlert}}
+        <div class="alert alert-primary" role="alert" style="padding: 15px; margin: 10px; background-color:{{alertColor}}; color: #F7EDE2;">
+        {{alertMessage}}
+        </div>
+    {{/if}}
+
+    <div class="main-content">
+        
+        <h3>Modifier l'événement #{{eventId}}</h3>              
+        
+        <a href="/guests" class="buttonsDesign edit-events-button">Gérer les invités</a>
+        
+        <a href="/mySongs" class="buttonsDesign edit-events-button">Gérer les chansons</a>
+
+        <a href="/myMeals" class="buttonsDesign edit-events-button">Gérer les repas</a>
+        
+
+        <form action="/events" method="post" role ="form" class="formStyle" id="new-event-detail-form" style="padding-bottom: 150px;">
+                <legend>Détails de l'évènement</legend>
+                    <label for="newEventName">Entrez le nouveau nom de l'événement:</label><br>
+                    <input type="text" name="newEventName" id="newEventName" required><br>
+
+                    <label for="newDate">Entrez la nouvelle date de l'événement:</label><br>
+                    <input type="text" name="newDate" id="newDate" placeholder="AAAA-MM-JJ" pattern="[1-2][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]" required><br>
+
+                    <label for="newLocation">Entrez le nouveau lieu de l'événement:</label><br>
+                    <input type="text" name="newLocation" id="newLocation" required><br>
+                <br>
+                <input type="hidden" name="_method" value="put">
+                <button type="submit" class="buttonsDesign" id="new-event-form-submit">Mettre à jour</button>
+        </form>
+    </div>
+
+    <script type="text/javascript">
+        document.getElementById("home-navbar").innerText = "Accueil";
+        document.getElementById("events-navbar").innerText = "Mes Événements";
+        document.getElementById("about-us-navbar").innerText = "À Propos";
+        document.getElementById("sign-in-navbar").innerText = "Se Connecter | S'Inscrire"
+    </script>
+
+    {{#if isSignedIn}}
+        <script type="text/javascript">
+        
+            let button = document.getElementById("sign-in-navbar");
+            button.innerText = "Se Déconnecter";
+            button.href = "/signout";
+        </script>
+    {{/if}}
+</body>

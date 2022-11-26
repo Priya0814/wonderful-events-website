@@ -1,0 +1,76 @@
+<body>
+    <div class="hero-image">
+        <div class="hero-text">
+            <h1 style="font-size:50px">{{welcomeText}} à de merveilleux événements</h1>
+            <a href="/signup" id="hero-button">Inscrivez-vous</a>
+        </div>
+    </div>
+   
+    <div class="homeBody">
+
+        <h1 class="welcomeHeader">Planifiez des événements comme jamais auparavant</h1>
+
+    <div class="main-content">    
+            <div class="landingPageDescription">
+                <p>
+                Ce site Web transformera la façon dont vous planifiez votre prochain événement. Les idées incluent, mais ne sont pas limitées à :
+                </p>
+                <ul>               
+                    {{#each eventIdeas}}
+                        <li> {{this}}</li>
+                    {{/each}}                 
+                </ul>
+            </div>
+             
+        
+        <div class="row">
+            <div class="column" >
+                <h2 id="h2subtitle">Notre mission</h2>
+                <p>Puisque le monde rouvre, il est temps de faire à nouveau la fête avec votre famille et vos amis.
+                La planification d'événements peut devenir compliquée, frustrante et même stressante. Heureusement, nous
+                a créé un site Web conçu pour faire de la planification d'événements une expérience plus amusante et sans tracas.
+                </p>
+
+                <h2 id="h2subtitle">Nos services</h2>
+                <p>Nous vous donnons les outils pour créer vos événements, les gérer et les modifier.
+                Vous pouvez planifier votre événement avec un nom, un lieu et des dates. Vous pouvez décider qui vous voulez inviter,
+                quelle musique vous voulez jouer, et quels aliments et boissons vous voulez servir.
+                Vous pouvez décider de planifier un, deux ou même cent événements avec notre service gratuit. La limite est seulement vous-même.
+                </p>
+
+
+                <h2 id="h2subtitle">Notre promesse</h2>
+                <p>L'utilisation de notre site Web devrait faire de la planification d'événements une promenade dans le parc. 
+                Vous trouverez l'expérience de l'organisation d'événements relativement facile, et vous pourrez profiter de votre 
+                événement sans vous soucier de la logistique préalable.    
+                </p>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+    <script type="text/javascript">
+        document.getElementById("home-navbar").innerText = "Accueil";
+        document.getElementById("events-navbar").innerText = "Mes Événements";
+        document.getElementById("about-us-navbar").innerText = "À Propos";
+        document.getElementById("sign-in-navbar").innerText = "Se Connecter | S'Inscrire"
+    </script>
+
+    {{#if isSignedIn}}
+        <script type="text/javascript">
+            let button = document.getElementById("sign-in-navbar");
+            button.innerText = "Se Déconnecter";
+            button.href = "/signout";
+
+            let heroButton = document.getElementById("hero-button");
+            heroButton.innerText = "Mes Événements";
+            heroButton.href = "/myEvents";
+        </script>
+    {{else}}
+        <script type="text/javascript">
+            let eventsbutton = document.getElementById("events-navbar");
+            eventsbutton.style.display = "none";
+        </script>
+    {{/if}}
+</body>

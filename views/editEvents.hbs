@@ -1,0 +1,43 @@
+<body>
+    {{#if displayAlert}}
+        <div class="alert alert-primary" role="alert" style="padding: 15px; margin: 10px; background-color:{{alertColor}}; color: #F7EDE2;">
+        {{alertMessage}}
+        </div>
+    {{/if}}
+
+    <div class="main-content">
+        
+        <h3>Edit Event #{{eventId}}</h3>              
+        
+        <a href="/guests" class="buttonsDesign edit-events-button">Manage Guests</a>
+        
+        <a href="/mySongs" class="buttonsDesign edit-events-button">Manage Songs</a>
+
+        <a href="/myMeals" class="buttonsDesign edit-events-button">Manage Meals</a>
+        
+
+        <form action="/events" method="post" role ="form" class="formStyle" id="new-event-detail-form" style="padding-bottom: 150px;">
+                <legend>Event Details</legend>
+                    <label for="newEventName">Enter the new name of the event:</label><br>
+                    <input type="text" name="newEventName" id="newEventName" required><br>
+
+                    <label for="newDate">Enter the new date of the event:</label><br>
+                    <input type="text" name="newDate" id="newDate" placeholder="YYYY-MM-DD" pattern="[1-2][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]" required><br>
+
+                    <label for="newLocation">Enter the new location of the event:</label><br>
+                    <input type="text" name="newLocation" id="newLocation" required><br>
+                <br>
+                <input type="hidden" name="_method" value="put">
+                <button type="submit" class="buttonsDesign" id="new-event-form-submit">Update</button>
+        </form>
+    </div>
+
+        {{#if isSignedIn}}
+        <script type="text/javascript">
+        
+            let button = document.getElementById("sign-in-navbar");
+            button.innerText = "Sign Out";
+            button.href = "/signout";
+        </script>
+    {{/if}}
+</body>

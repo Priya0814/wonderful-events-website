@@ -1,0 +1,92 @@
+<body>
+
+    {{#if displayAlert}}
+        <div class="alert alert-primary" role="alert" style="padding: 15px; margin: 10px; background-color:{{alertColor}}; color: #F7EDE2;">
+        {{alertMessage}}
+        </div>
+    {{/if}}
+
+    <div class="section">
+        <div class="main-content subject-main-content" >
+
+            <a href="/events" class="buttonsDesign edit-events-button">Retourner</a>
+
+            <h3>Repas</h3>
+
+            <form action="/meals" method="post" role ="form" class="formStyle" id="add-form">
+                <legend>Ajouter un repas</legend>
+                <label for="meal-main">Plat principal:</label><br>
+                <input type="text" name="mealMain" id="meal-main" required><br>
+                <label for="meal-drink">Boisson:</label><br>
+                <input type="text" name="mealDrink" id="meal-drink" required><br>
+                <label for="is-vegan">Végétalien:</label>
+                <input type="checkbox" name="mealVegan" id="meal-vegan"><br>
+                <br>
+                <input type="hidden" name="_method" value="post">
+                <button type="submit" class="buttonsDesign" id="meal-add-form-submit">Soumettre</button>
+            </form>
+
+            <form action="/meals" method="post" role ="form" class="formStyle" id="delete-meal-form">
+                <legend>Supprimer le repas</legend>
+                <label for="delete-meal">Identifiant du repas:</label><br>
+                <input type="text" name="mealId" id="delete-meal" required><br>
+                <br>
+                <input type="hidden" name="_method" value="delete">
+                <button type="submit" class="buttonsDesign" id="meal-delete-form-submit">Supprimer</button>
+            </form>
+
+            <form action="/meals" method="post" role ="form" class="formStyle" id="update-form" style="margin-bottom: 150px;">
+                <legend>Mettre à jour le repas</legend>
+                <label for="meal-id">Identifiant du repas:</label><br>
+                <input type="text" name="mealId" id="meal-id" required><br>
+                <label for="new-main">Nouveau plat principal:</label><br>
+                <input type="text" name="newMain" id="new-main" required>
+                <br>
+                <label for="new-drink">Nouvelle boisson:</label><br>
+                <input type="text" name="newDrink" id="new-drink" required><br>
+                <label for="new-is-vegan">Végétalien:</label>
+                <input type="checkbox" name="newVegan" id="new-vegan"><br>
+                <br>
+                <input type="hidden" name="_method" value="put">
+                <button type="submit" class="buttonsDesign" id="update-form-submit">Soumettre</button>
+            </form>
+        </div>
+
+        <div class="table-section">
+            <table class="subject-table">
+                <tr>
+                    <th>Id</th>
+                    <th>Plat principal</th>
+                    <th>Boisson</th>
+                    <th>Végétalien</th>
+                </tr>
+                {{#each allMeals}}
+                <tr>
+                    <td>{{this.MealId}}</td>
+                    <td>{{this.Main}}</td>
+                    <td>{{this.Drink}}</td>
+                    <td>{{YesNoTrueFalse this.Vegan}}</td>
+                </tr>
+                {{/each}}
+            </table>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        document.getElementById("home-navbar").innerText = "Accueil";
+        document.getElementById("events-navbar").innerText = "Mes Événements";
+        document.getElementById("about-us-navbar").innerText = "À Propos";
+        document.getElementById("sign-in-navbar").innerText = "Se Connecter | S'Inscrire"
+    </script>
+
+    {{#if isSignedIn}}
+        <script type="text/javascript">
+            let button = document.getElementById("sign-in-navbar");
+
+            button.innerText = "Se Déconnecter";
+            button.href = "/signout";
+        </script>
+    {{/if}}
+
+
+</body>

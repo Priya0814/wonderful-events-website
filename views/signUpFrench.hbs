@@ -1,0 +1,36 @@
+<body>
+    {{#if displayAlert}}
+        <div class="alert alert-primary" role="alert" style="padding: 15px; margin: 10px; background-color:{{alertColor}}; color: #F7EDE2;">
+        {{alertMessage}}
+        </div>
+    {{/if}}
+    
+    <div class="sign-content">
+            <form action="{{action}}" method="post" role ="form" class="formStyle signInFormStyle" id="sign-in-form">
+            <legend>{{heading}}</legend>
+            {{#each fields}}
+                <label for="{{this.field}}">{{this.field}}:</label><br>
+                {{#if isPassword}}
+                    <input required type="password" name="{{this.body}}" id="{{this.field}}" minlength="8"><br>
+                {{else}}
+                    <input required type="text" name="{{this.body}}" id="{{this.field}}"><br>
+                {{/if}}
+            {{/each}}
+            <br>
+            <button type="submit" class="buttonsDesign" id="sign-form-submit">Soumettre</button>
+    </form>
+    <p id="sign-up">{{text}} <a href="{{link}}">{{linkText}}</a> </p>
+    </div>
+        
+    <script type="text/javascript">
+        let eventsbutton = document.getElementById("events-navbar");
+        eventsbutton.style.display = "none";
+    </script>
+
+    <script type="text/javascript">
+        document.getElementById("home-navbar").innerText = "Accueil";
+        document.getElementById("events-navbar").innerText = "Mes Événements";
+        document.getElementById("about-us-navbar").innerText = "À Propos";
+        document.getElementById("sign-in-navbar").innerText = "Se Connecter | S'Inscrire"
+    </script>
+</body>

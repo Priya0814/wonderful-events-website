@@ -1,0 +1,31 @@
+<header class="header">
+    <div class="heroImage">
+        <div class="heroContents">
+             <h1 id="title" style="text-align:center">Wonderful Events</h1>  
+        </div>       
+    </div> 
+ 
+    <div class="navbar">
+        <ul>
+            <li><a href="/home" id="home-navbar">Home</a></li>
+            <li><a href="/myEvents" id="events-navbar">My Events</a></li>
+            <li><a href="/aboutUs" id="about-us-navbar">About Us</a></li>
+            <li><a id="sign-in-navbar" href="/signin">Sign in | Sign Up</a></li>
+            <li>  
+                <div class="dropdown">
+                <!-- Code taken from: https://www.w3schools.com/howto/howto_css_dropdown_navbar.asp and modified -->
+                <button class="dropbtn">Language ⮟</button>
+                <div class="dropdown-content">
+                    <form action="/language" method="POST" role="form">
+                        <select name="language" onchange="this.form.submit()">
+                        <option value="" selected="selected" hidden="hidden">{{current}}</option>
+                            <option value="en">English</option>
+                            <option value="fr">French</option>
+                        </select>
+                    </form>
+                </div>
+            </div> 
+            </li>  
+        </ul>
+    </div>        
+</header>

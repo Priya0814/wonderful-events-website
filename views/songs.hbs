@@ -1,0 +1,81 @@
+<body>
+    {{#if displayAlert}}
+        <div class="alert alert-primary" role="alert" style="padding: 15px; margin: 10px; background-color:{{alertColor}}; color: #F7EDE2;">
+        {{alertMessage}}
+        </div>
+    {{/if}}
+
+    <div class="section">
+    <div class="main-content subject-main-content" >
+
+        <a href="/events" class="buttonsDesign edit-events-button">Back to Event</a>
+
+        <h3>Songs</h3>
+            {{!-- Form for endpoint POST /guest/add --}}
+        <form action="/songs" method="post" role ="form" class="formStyle" id="add-form">
+            <legend>Add song</legend>
+            <label for="songName">Song Name:</label><br>
+            <input type="text" name="songName" id="songName" required><br>
+            <label for="artistName">Artist Name:</label><br>
+            <input type="text" name="artistName" id="artistName" required><br>
+            <label for="genreName">Genre:</label><br>
+            <input type="text" name="genreName" id="genreName" required><br>
+            <input type="hidden" name="_method" value="post">
+            <button type="submit" class="buttonsDesign" id="song-add-form-submit">Add</button>
+        </form>
+
+        <form action="/songs" method="post" role ="form" class="formStyle" id="delete-guest-form">
+                <legend>Delete song</legend>
+                    <label for="songId">Song Id:</label><br>
+                    <input type="text" name="songId" id="songId" required><br>
+                <br>
+                <input type="hidden" name="_method" value="delete">
+                <button type="submit" class="buttonsDesign" id="song-delete-form-submit">Delete</button>
+        </form>
+
+        <form action="/songs" method="post" role ="form" class="formStyle" id="update-form" style="margin-bottom: 150px;">
+            <legend>Update song</legend>
+            <label for="songId">Song Id:</label><br>
+            <input type="text" name="songId" id="songId" required><br>
+            <label for="newName">New Song Name:</label><br>
+            <input type="text" name="newName" id="newName" required><br>
+            <label for="newArtist">New Artist Name:</label><br>
+            <input type="text" name="newArtist" id="newArtist" required><br>
+            <label for="newGenre">New Genre:</label><br>
+            <input type="text" name="newGenre" id="newGenre" required><br>
+            <br>
+            <input type="hidden" name="_method" value="put">
+            <button type="submit" class="buttonsDesign" id="update-form-submit">Update</button>
+        </form>
+    
+
+    </div>
+    <div class="table-section">
+        <table class="subject-table">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Artist</th>
+                <th>Genre</th>
+            </tr>
+            {{#each allSongs}}
+            <tr>
+                <td>{{this.SongId}}</td>
+                <td>{{this.Name}}</td>
+                <td>{{this.Artist}}</td>
+                <td>{{this.Genre}}</td>
+            </tr>
+            {{/each}}
+        </table>
+    </div>
+    </div>
+
+    {{#if isSignedIn}}
+        <script type="text/javascript">
+            let button = document.getElementById("sign-in-navbar");
+
+            button.innerText = "Sign Out";
+            button.href = "/signout";
+        </script>
+    {{/if}}
+</body>

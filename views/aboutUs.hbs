@@ -1,0 +1,57 @@
+<body>
+    <div class="homeBody">
+
+    <div class="main-content">             
+
+
+        <div class="row">
+            <div class="column-about" >
+
+
+                    <h3 id="h3subtitle">Mission</h3>                
+                    <p>Event planning is a bore, so we created this website to make it fun and easy for the average user to create their 
+                    next get-together. It will be a linear and effortless process to make the next event you want to plan a fun task. 
+                    </p>
+                    <br>
+                    <img src={{image1}} id="profilePic" alt="avatar1"/>
+                    <h2 id="h2subtitle">Alexei</h2>                   
+                    <p>Alexei is a clever student by day, Java/python/C/C#/Wordle enthusiast by night. He loves to play guitar and eat grass. He began to 
+                    code at age 15 after watching Mr. Robot, and has recently discovered he cannot be Rami Malek's twin.
+                    </p>
+
+                    <img src={{image2}} id="profilePic" alt="avatar2"/>
+                    <h2 id="h2subtitle">Priya</h2>
+                    <p>Quiet but hardworking, Priya is either busy with school or work. Her main hobby is sleeping (whenever she gets the chance), playing video
+                    games, baking, or video editing. She began coding when she realized her brother was terrible at it, and had to demonstrate 
+                    to him on how it's actually done. 
+                    </p>
+
+                    <img src={{image3}} id="profilePic" alt="avatar3"/>
+                    <h2 id="h2subtitle">Lauren</h2>
+                    <p>She loves coffee, her cat and sometimes talking about how Game of Thrones should have ended. Lauren can wander into a vortex of Wikipedia
+                    articles or a tutorial pit for coding for hours at a time. Her main hobbies include playing old video games and making code for automating 
+                    tedious jobs. 
+                    </p>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+    {{#if isSignedIn}}
+        <script type="text/javascript">
+        
+            let button = document.getElementById("sign-in-navbar");
+            button.innerText = "Sign Out";
+            button.href = "/signout";
+            let heroButton = document.getElementById("hero-button");
+            heroButton.innerText = "My Events";
+            heroButton.href = "/myEvents";
+        </script>
+    {{else}}
+        <script type="text/javascript">
+            let eventsbutton = document.getElementById("events-navbar");
+            eventsbutton.style.display = "none";
+        </script>
+    {{/if}}
+</body> 

@@ -1,0 +1,62 @@
+<body>
+    <div class="homeBody">
+
+    <div class="main-content">             
+
+
+        <div class="row">
+            <div class="column-about" >
+                    <h3 id="h3subtitle">Mission</h3>                
+                    <p>La planification d'événements est ennuyeuse, nous avons donc créé ce site Web pour qu'il soit amusant et facile pour l'utilisateur moyen de créer son
+                    prochain rendez-vous. Ce sera un processus linéaire et sans effort pour faire du prochain événement que vous souhaitez planifier une tâche amusante.
+                    </p>
+                    <br>
+                    <img src={{image1}} id="profilePic" alt="avatar1"/>
+                    <h2 id="h2subtitle">Alexei</h2>                   
+                    <p>Alexei est un étudiant intelligent le jour, passionné de Java/python/C/C#/Wordle la nuit. Il adore jouer de la guitare et manger de l'herbe. Il a commencé à
+                    code à 15 ans après avoir regardé Mr. Robot, et a récemment découvert qu'il ne peut pas être le jumeau de Rami Malek.
+                    </p>
+
+                    <img src={{image2}} id="profilePic" alt="avatar2"/>
+                    <h2 id="h2subtitle">Priya</h2>
+                    <p>Calme mais travailleuse, Priya est soit occupée par l'école, soit par le travail. Son passe-temps principal est de dormir (chaque fois qu'elle en a l'occasion), de regarder des vidéos
+                    jeux, pâtisserie ou montage vidéo. Elle a commencé à coder lorsqu'elle a réalisé que son frère était nul dans ce domaine et a dû démontrer
+                    à lui sur la façon dont c'est réellement fait. 
+                    </p>
+
+                    <img src={{image3}} id="profilePic" alt="avatar3"/>
+                    <h2 id="h2subtitle">Lauren</h2>
+                    <p>Elle aime le café, son chat et parle parfois de la fin de Game of Thrones. Lauren peut se promener dans un vortex de Wikipédia
+                    articles ou une fosse de tutoriel pour coder pendant des heures à la fois. Ses principaux passe-temps incluent jouer à de vieux jeux vidéo et créer du code pour automatiser
+                    travaux fastidieux.
+                    </p>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+    <script type="text/javascript">
+        document.getElementById("home-navbar").innerText = "Accueil";
+        document.getElementById("events-navbar").innerText = "Mes Événements";
+        document.getElementById("about-us-navbar").innerText = "À Propos";
+        document.getElementById("sign-in-navbar").innerText = "Se Connecter | S'Inscrire"
+    </script>
+
+    {{#if isSignedIn}}
+        <script type="text/javascript">
+        
+            let button = document.getElementById("sign-in-navbar");
+            button.innerText = "Se Déconnecter";
+            button.href = "/signout";
+            let heroButton = document.getElementById("hero-button");
+            heroButton.innerText = "My Events";
+            heroButton.href = "/myEvents";
+        </script>
+    {{else}}
+        <script type="text/javascript">
+            let eventsbutton = document.getElementById("events-navbar");
+            eventsbutton.style.display = "none";
+        </script>
+    {{/if}}
+</body> 

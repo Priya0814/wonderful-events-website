@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: models/mainModel.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: models/mainModel.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const mysql = require("mysql2/promise");
+const logger = require("../logger");
+var cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
+const uuid = require('uuid');
+
+var connection;
+
+/**
+ * Initialize the connection to the wonder events database.
+ * @param {*} dbname Database to connect to.
+ * @param {*} reset Drop existing tables if true, don't drop otherwise.
+ */
+async function initialize(dbname, reset) {
+    connection = await mysql.createConnection({
+        host: 'localhost', 
+        user: 'root',
+        port: '4242',
+        password: 'tatltuae',
+        database: dbname
+    });
+
+    if (reset) {
+        let dropQuery = "DROP TABLE IF EXISTS song;";
+        await connection.execute(dropQuery).then(logger.info("song table dropped"));
+        dropQuery = "DROP TABLE IF EXISTS guest;";
+        await connection.execute(dropQuery).then(logger.info("guest table dropped"));
+        dropQuery = "DROP TABLE IF EXISTS meal;";
+        await connection.execute(dropQuery).then(logger.info("meal table dropped"));
+        dropQuery = "DROP TABLE IF EXISTS event;";
+        await connection.execute(dropQuery).then(logger.info("event table dropped"));
+        dropQuery = "DROP TABLE IF EXISTS user;";
+        await connection.execute(dropQuery).then(logger.info("user table dropped"));
+    }
+
+    let sqlQuery = "CREATE TABLE IF NOT EXISTS user(UserId INTEGER PRIMARY KEY AUTO_INCREMENT, Username VARCHAR(100), Password VARCHAR(100));";   
+    await connection.execute(sqlQuery).then(logger.info("User table created/exists"));
+    sqlQuery = "CREATE TABLE IF NOT EXISTS event(EventId INTEGER PRIMARY KEY AUTO_INCREMENT, Name VARCHAR(100), Date DATE, Location VARCHAR(100), UserId INTEGER, FOREIGN KEY(UserId) REFERENCES user(UserId));"
+    await connection.execute(sqlQuery).then(logger.info("Event table created/exists"));
+    sqlQuery = "CREATE TABLE IF NOT EXISTS meal(MealId INTEGER PRIMARY KEY AUTO_INCREMENT, Main VARCHAR(100), Drink VARCHAR(100), Vegan BOOLEAN, EventId INTEGER, FOREIGN KEY(EventId) REFERENCES event(EventId));";
+    await connection.execute(sqlQuery).then(logger.info("Meal table created/exists"));
+    sqlQuery = "CREATE TABLE IF NOT EXISTS guest(GuestId INTEGER PRIMARY KEY AUTO_INCREMENT, Name VARCHAR(100), EventId INTEGER, MealId INTEGER, FOREIGN KEY(MealId) REFERENCES meal(MealId), FOREIGN KEY(EventId) REFERENCES event(EventId));";
+    await connection.execute(sqlQuery).then(logger.info("Guest table created/exists"));
+    sqlQuery = "CREATE TABLE IF NOT EXISTS song(SongId INTEGER PRIMARY KEY AUTO_INCREMENT, Name VARCHAR(50), Artist VARCHAR(50), Genre VARCHAR(50), EventId INTEGER, FOREIGN KEY(EventId) REFERENCES event(EventId));";
+    await connection.execute(sqlQuery).then(logger.info("Song table created/exists"));
+
+}
+
+/**
+ * Public access to the database connection.
+ * @returns The connection to the database.
+ */
+function getConnection(){
+    return connection;
+}
+
+/**
+ * Class for system error.
+ */
+class SystemError extends Error {
+}
+
+module.exports = {
+    initialize,
+    getConnection,
+    SystemError
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="DatabaseAccessError.html">DatabaseAccessError</a></li><li><a href="InvalidIdError.html">InvalidIdError</a></li><li><a href="InvalidInputError.html">InvalidInputError</a></li><li><a href="InvalidPasswordError.html">InvalidPasswordError</a></li><li><a href="InvalidUsernameError.html">InvalidUsernameError</a></li><li><a href="MyUserDataError.html">MyUserDataError</a></li><li><a href="NoExistingUserDataError.html">NoExistingUserDataError</a></li><li><a href="Session.html">Session</a></li><li><a href="SystemError.html">SystemError</a></li><li><a href="UsernameTakenError.html">UsernameTakenError</a></li></ul><h3>Global</h3><ul><li><a href="global.html#aboutUs">aboutUs</a></li><li><a href="global.html#addGuest">addGuest</a></li><li><a href="global.html#addMeal">addMeal</a></li><li><a href="global.html#addSong">addSong</a></li><li><a href="global.html#authenticateUser">authenticateUser</a></li><li><a href="global.html#createEvent">createEvent</a></li><li><a href="global.html#createMeal">createMeal</a></li><li><a href="global.html#createSession">createSession</a></li><li><a href="global.html#createSong">createSong</a></li><li><a href="global.html#decide">decide</a></li><li><a href="global.html#deleteEvent">deleteEvent</a></li><li><a href="global.html#deleteGuest">deleteGuest</a></li><li><a href="global.html#deleteMeal">deleteMeal</a></li><li><a href="global.html#deleteSong">deleteSong</a></li><li><a href="global.html#editEvent">editEvent</a></li><li><a href="global.html#events">events</a></li><li><a href="global.html#findGuests">findGuests</a></li><li><a href="global.html#getAllEvents">getAllEvents</a></li><li><a href="global.html#getAllMeals">getAllMeals</a></li><li><a href="global.html#getAllSongs">getAllSongs</a></li><li><a href="global.html#getConnection">getConnection</a></li><li><a href="global.html#getEventId">getEventId</a></li><li><a href="global.html#giveError">giveError</a></li><li><a href="global.html#guestsPage">guestsPage</a></li><li><a href="global.html#HelperEvent">HelperEvent</a></li><li><a href="global.html#HelperMeal">HelperMeal</a></li><li><a href="global.html#home">home</a></li><li><a href="global.html#initialize">initialize</a></li><li><a href="global.html#isValidGuest">isValidGuest</a></li><li><a href="global.html#isValidGuestName">isValidGuestName</a></li><li><a href="global.html#isValidMeal">isValidMeal</a></li><li><a href="global.html#isValidPassword">isValidPassword</a></li><li><a href="global.html#isValidSong">isValidSong</a></li><li><a href="global.html#isValidUsername">isValidUsername</a></li><li><a href="global.html#refreshSession">refreshSession</a></li><li><a href="global.html#signIn">signIn</a></li><li><a href="global.html#signInRequest">signInRequest</a></li><li><a href="global.html#signOutRequest">signOutRequest</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#signUpRequest">signUpRequest</a></li><li><a href="global.html#songs">songs</a></li><li><a href="global.html#updateEvent">updateEvent</a></li><li><a href="global.html#updateEventsList">updateEventsList</a></li><li><a href="global.html#updateGuest">updateGuest</a></li><li><a href="global.html#updateMeal">updateMeal</a></li><li><a href="global.html#updateMealIds">updateMealIds</a></li><li><a href="global.html#updateNamesList">updateNamesList</a></li><li><a href="global.html#updateSong">updateSong</a></li><li><a href="global.html#updateSongIds">updateSongIds</a></li><li><a href="global.html#YesNoTrueFalse">YesNoTrueFalse</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Fri May 20 2022 14:58:16 GMT-0400 (Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

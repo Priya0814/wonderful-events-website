@@ -1,0 +1,39 @@
+{
+  "name": "wonderful-events",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.18.2",
+    "express-handlebars": "^6.0.6",
+    "express-list-routes": "^1.1.3",
+    "init": "^0.1.2",
+    "jest": "^28.1.3",
+    "mysql2": "^2.3.3",
+    "pino": "^7.11.0",
+    "pino-caller": "^3.2.0",
+    "pino-http": "^7.1.0",
+    "pino-pretty": "^7.6.1",
+    "supertest": "^6.3.1",
+    "uuid": "^8.3.2",
+    "validator": "^13.7.0"
+  },
+  "scripts": {
+    "test": "jest --verbose /tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexeiDanelyuk/wonderful-events.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexeiDanelyuk/wonderful-events/issues"
+  },
+  "homepage": "https://github.com/AlexeiDanelyuk/wonderful-events#readme",
+  "devDependencies": {
+    "jsdoc": "^3.6.10"
+  }
+}
